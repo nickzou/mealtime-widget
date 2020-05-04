@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Merriweather+Sans:300,300i,400,400i,700&display=swap');
+
+%merriweather-sans {
+    font-family: 'Merriweather Sans', sans-serif;
+}
+
+%fab {
+    @extend %merriweather-sans;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 0 rgba($indigo, 0.45);
+    text-transform: uppercase;
+}

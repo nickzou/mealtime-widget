@@ -1,0 +1,40 @@
+%flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+%border-radius  {
+    border-radius: 4px;
+}
+
+%drop-shadow {
+    box-shadow: 0px 3px 3px rgba(black, 0.25);
+}
+
+%ripple-animation {
+    position: relative;
+    overflow: hidden;
+    z-index:1;
+    &:after {
+        display: none;
+        content: '';
+        position: absolute;
+        border-radius: 50%;
+        background-color: rgba(black, 0.3);
+        top: 50%;
+        left: 50%;
+        animation: ripple 1s;
+        opacity: 0;
+        width: 100px;
+        height: 100px;
+        margin-top: -50px;
+        margin-left: -50px;
+    }
+    &:focus {
+        outline: none;
+        &:not(:active):after {
+            display: block;
+        }
+    }
+}

@@ -1,0 +1,3 @@
+%main-gradient {
+    @include linear-gradient( to top, $turquoise 0%,  $blue 75%);
+}
