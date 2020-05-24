@@ -51,6 +51,11 @@
         line-height: 22px;
         font-weight: bold;
     }
+    .item-info {
+        font-size: 12px;
+        line-height: 20px;
+        font-weight: light;
+    }
     .item-heading {
         font-size: 14px;
         line-height: 20px;
@@ -70,6 +75,10 @@
         }
         &.fill {
             color: white;
+            svg {
+                fill: white;
+                height: 9px;
+            }
             &.blue {
                 background-color: $blue;
                 border-color: $blue;
@@ -112,6 +121,9 @@
             border: none;
             border-radius: 18px;
         }
+    }
+    .header-main {
+        padding-top: 10px;
     }
     .mealtime-main {
         padding: 10px;
@@ -158,13 +170,36 @@
             fill: $indigo;
         }
     }
+    .price {
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: bold;
+    }
+    .calories {
+        font-size: 12px;
+        line-height: 16px;
+        font-weight: 300;
+    }
     #button-close {
+        margin-left: auto;
+    }
+    #button-back {
         margin-left: auto;
     }
     .mealtime-view {
         display: flex;
         flex-direction: column;
         height: 100%;
+    }
+    .item-details-header {
+        display: flex;
+        .item-details-info {
+            width: 70%;
+        }
+        .item-details-price {
+            width: 30%;
+            text-align: right;
+        }
     }
     .menu-item {
         padding: 4px 0;
@@ -184,16 +219,6 @@
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-        }
-        .price {
-            font-size: 16px;
-            line-height: 20px;
-            font-weight: bold;
-        }
-        .calories {
-            font-size: 12px;
-            line-height: 16px;
-            font-weight: 300;
         }
         .button-add {
             margin: 4px 0 4px auto;

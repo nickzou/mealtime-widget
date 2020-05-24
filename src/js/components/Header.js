@@ -19,8 +19,9 @@ class Header extends React.Component {
                     {this.props.closeButton}
                 </div>
                 <div className="header-main">
-                    <p>Welcome to Burrito Boyz online ordering! Place an order for pickup below!</p>
-                    {this.props.locationSelect}
+                    {this.props.activeView === 'featuredView' && <p>Welcome to Burrito Boyz online ordering! Place an order for pickup below!</p>}
+                    {this.props.activeview === 'featuredView' && this.props.locationSelect}
+                    {this.props.activeView === 'itemDetailsView' && this.props.backButton}
                 </div>
             </div>
         )

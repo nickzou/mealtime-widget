@@ -1,23 +1,20 @@
 import React from 'react';
 import FeaturedView from './FeaturedView';
-import MenuItem from './MenuItem';
+import ItemDetailsView from './ItemDetailsView';
 
 const Main = (props) => {
     return (
         <div className="mealtime-main">
-            {props.featuredView &&
+            {props.activeView === 'featuredView' &&
                 <FeaturedView>
-                    {props.menuItems.map((item, index) => {
-                        if(!!item.featured){
-                            return <MenuItem
-                                key={index}
-                                name={item.name}
-                                price={item.price}
-                                calories={item.calories}
-                            />
-                        }
-                    })}
+                    {props.featuredMenuItems}
                 </FeaturedView>
+            }
+            {
+                props.activeView === 'itemDetailsView' &&
+                <ItemDetailsView
+                    activeItem={props.activeItem}
+                />
             }
         </div>
     )

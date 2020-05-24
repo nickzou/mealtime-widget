@@ -1,8 +1,10 @@
 import React from 'react';
 import Header from './Header';
 import Main from './Main';
+import MenuItem from './MenuItem';
 import Footer from './Footer';
 import ChevronDown from '../svgs/icon-chevron_down';
+import ChevronLeft from '../svgs/icon-chevron_left';
 import Select from 'react-dropdown-select';
 
 class Wrapper extends React.Component {
@@ -11,17 +13,18 @@ class Wrapper extends React.Component {
         this.state = {
             active: false,
             locations: [
-                {label: 'Toronto', value:'Toronto'},
-                {label:'London', value:'London'},
-                {label:'Vancouver', value:'Vancouver'}
+                {label: 'Toronto', value:'toronto'},
+                {label:'London', value:'london'},
+                {label:'Vancouver', value:'vancouver'}
             ],
             activeLocation: null,
-            featuredView: true,
+            activeView: 'featuredView',
+            previousView: '',
             menuItems: [
                 {
                     id: 34533,
                     name: 'Chicken Burrito',
-                    description: '',
+                    description: 'This is a description',
                     price: '$7.95',
                     calories: '530 - 990',
                     featured: true
@@ -44,18 +47,25 @@ class Wrapper extends React.Component {
                 },
                 {
                     id: 3453365,
-                    name: 'Bat Burrito',
+                    name: 'Shrimp Burrito',
                     description: '',
                     price: '$7.95',
                     calories: '530 - 990',
                     featured: false
                 }
-            ]
+            ],
+            activeItem: null
         };
         this.activate = this.activate.bind(this);
         this.deactivate = this.deactivate.bind(this);
+        this.viewChange = this.viewChange.bind(this);
+        this.addAction = this.addAction.bind(this);
+        this.back = this.back.bind(this);
         this.closeButton = <button id="button-close" className="button-icon" onClick={this.deactivate}><ChevronDown /></button>;
+        this.backButton = <button id="button-back" className="button-small pill fill indigo button-back" onClick={()=>this.back(this.state.activeView, this.state.previousView)}><ChevronLeft /> back</button>
         this.locationSelect = <Select options={this.state.locations} onChange={(location) => this.setLocation(location)}></Select>;
+        this.menuItems = this.state.menuItems.map((item, index) => { return <MenuItem key={index} name={item.name} price={item.price} calories={item.calories} addButton={<button className="button-small pill fill blue button-add" onClick={()=>this.addAction(item)}>add</button>} />});
+        this.featuredMenuItems = this.state.menuItems.map((item, index) => { if(!!item.featured) {return <MenuItem key={index} name={item.name} price={item.price} calories={item.calories} addButton={<button className="button-small pill fill blue button-add" onClick={()=>this.addAction(item)}>add</button>} />}});
     }
     activate() {
         this.setState({active: true});
@@ -66,6 +76,24 @@ class Wrapper extends React.Component {
     setLocation(location) {
         this.setState({activeLocation: location});
     }
+    viewChange(activeView) {
+        this.setState({
+            previousView: activeView
+        });
+    }
+    addAction(item) {
+        this.viewChange(this.state.activeView);
+        this.setState({
+            activeView: 'itemDetailsView',
+            activeItem: item
+        });
+    }
+    back(activeView, previousView) {
+        this.setState({
+            activeView: previousView,
+            previousView: activeView
+        });
+    }
     render() {
         return (
             <div className="mealtime-wrapper">
@@ -74,10 +102,13 @@ class Wrapper extends React.Component {
                         <Header
                             closeButton={this.closeButton}
                             locationSelect={this.locationSelect}
+                            activeView={this.state.activeView}
+                            backButton={this.backButton}
                         />
                         <Main
-                            featuredView={this.state.featuredView}
-                            menuItems={this.state.menuItems}
+                            activeView={this.state.activeView}
+                            featuredMenuItems={this.featuredMenuItems}
+                            activeItem={this.state.activeItem}
                         />
                         <Footer />
                     </div>
