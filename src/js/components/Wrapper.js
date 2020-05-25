@@ -27,7 +27,28 @@ class Wrapper extends React.Component {
                     description: 'This is a description',
                     price: '$7.95',
                     calories: '530 - 990',
-                    featured: true
+                    featured: true,
+                    modifier: [
+                        {
+                            type: 'portion',
+                            name: 'small',
+                            price: '$7.40',
+                            selected: false
+                        },
+                        {
+                            type: 'portion',
+                            name: 'large',
+                            price: '$9.41',
+                            selected: false
+                        },
+                        {
+                            type: 'tortilla',
+                            name: 'white tortilla',
+                            calories: '300',
+                            selected: false
+                        }
+                    ],
+
                 },
                 {
                     id: 345363,
@@ -54,7 +75,35 @@ class Wrapper extends React.Component {
                     featured: false
                 }
             ],
-            activeItem: null
+            activeItem: {
+                id: 34533,
+                name: 'Chicken Burrito',
+                description: 'This is a description',
+                price: '$7.95',
+                calories: '530 - 990',
+                featured: true,
+                modifier: [
+                    {
+                        type: 'portion',
+                        name: 'small',
+                        price: '$7.40',
+                        selected: false
+                    },
+                    {
+                        type: 'portion',
+                        name: 'large',
+                        price: '$9.41',
+                        selected: false
+                    },
+                    {
+                        type: 'tortilla',
+                        name: 'white tortilla',
+                        calories: '300',
+                        selected: false
+                    }
+                ],
+
+            }
         };
         this.activate = this.activate.bind(this);
         this.deactivate = this.deactivate.bind(this);
@@ -66,6 +115,7 @@ class Wrapper extends React.Component {
         this.locationSelect = <Select options={this.state.locations} onChange={(location) => this.setLocation(location)}></Select>;
         this.menuItems = this.state.menuItems.map((item, index) => { return <MenuItem key={index} name={item.name} price={item.price} calories={item.calories} addButton={<button className="button-small pill fill blue button-add" onClick={()=>this.addAction(item)}>add</button>} />});
         this.featuredMenuItems = this.state.menuItems.map((item, index) => { if(!!item.featured) {return <MenuItem key={index} name={item.name} price={item.price} calories={item.calories} addButton={<button className="button-small pill fill blue button-add" onClick={()=>this.addAction(item)}>add</button>} />}});
+        this.activeItemModifiers = [... new Set(this.state.activeItem.modifier.map(data => data.type))];
     }
     activate() {
         this.setState({active: true});
@@ -109,6 +159,7 @@ class Wrapper extends React.Component {
                             activeView={this.state.activeView}
                             featuredMenuItems={this.featuredMenuItems}
                             activeItem={this.state.activeItem}
+                            activeItemModifiers = {this.activeItemModifiers}
                         />
                         <Footer />
                     </div>

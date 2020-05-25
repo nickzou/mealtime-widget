@@ -13,6 +13,24 @@ const ItemDetailsView = (props) => {
                     <h2 className="calories">{props.activeItem.calories} <strong>cal</strong></h2>
                 </div>
             </div>
+            <div className="item-details-options">
+                {
+                    props.activeItemModifiers.map((title, index) => {
+                        return (<div key={index}>
+                            <div>{title}</div>
+                            <div>
+                                {
+                                    props.activeItem.modifier.map((modifier, index) => {
+                                        if(modifier.type === title) {
+                                            return <div key={index}>{modifier.name}</div>
+                                        }
+                                    })
+                                }
+                            </div>
+                        </div>);
+                    })
+                }
+            </div>
         </div>
     );
 };

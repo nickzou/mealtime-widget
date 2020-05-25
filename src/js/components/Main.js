@@ -14,6 +14,7 @@ const Main = (props) => {
                 props.activeView === 'itemDetailsView' &&
                 <ItemDetailsView
                     activeItem={props.activeItem}
+                    activeItemModifiers={props.activeItemModifiers}
                 />
             }
         </div>
